@@ -36,6 +36,12 @@ android {
 }
 
 dependencies {
+    app.each {
+        if(it.isPlatform)
+            implementation platform(it.dependency)
+        else
+            add(it.configuration, it.dependency)
+    }
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'

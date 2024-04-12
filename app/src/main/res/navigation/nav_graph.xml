@@ -10,6 +10,20 @@
         android:name="com.gma.showdebola.view.SplashScreenFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_splash_screen">
+        <action
+            android:id="@+id/action_Splash_To_Team_List"
+            app:destination="@id/FragmentTeamList" />
+        <action
+            android:id="@+id/action_Splash_To_Team_Detail"
+            app:destination="@id/FragmentTeamList" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FragmentTeamList"
+        android:name="com.gma.showdebola.view.teams.TeamListFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_team_list">
+
     </fragment>
 
 </navigation>

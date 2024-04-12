@@ -1,12 +1,13 @@
 package com.gma.showdebola.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.gma.showdebola.R
-import com.gma.showdebola.databinding.ActivityMainBinding
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
+import com.gma.showdebola.R
+import com.gma.showdebola.databinding.ActivityMainBinding
+import com.gma.showdebola.preferences.PreferenceKeys
+import com.gma.showdebola.preferences.getPreferenceString
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,10 +20,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupNavController()
+        setupView()
+    }
+
+    private fun setupView() {
+        val selectedTeamId = getPreferenceString(PreferenceKeys.TEAM_SELECTED_ID)
+        val action = if (selectedTeamId.isNullOrBlank())
+            R.id.action_Splash_To_Team_List
+        else
+            R.id.action_Splash_To_Team_Detail
+
+        navController.navigate(action)
     }
 
     private fun setupNavController() {
-        //navController = findNavController(R.id.main_nav_graph)
+        navController = findNavController(R.id.main_nav_graph)
         //appBarConfiguration = AppBarConfiguration(navController.graph)
         //setupActionBarWithNavController(navController, appBarConfiguration)
     }

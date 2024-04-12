@@ -1,0 +1,34 @@
+ext {
+    koin_version = "3.4.0"
+    koin_core = "io.insert-koin:koin-core:$koin_version"
+    koin_android = "io.insert-koin:koin-android:$koin_version"
+
+    retrofit_version = "2.9.0"
+    retrofit = "com.squareup.retrofit2:retrofit:$retrofit_version"
+    retrofit_converter_gson = "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    okhttp_version = "4.9.1"
+    okhttp = "com.squareup.okhttp3:okhttp:$okhttp_version"
+
+    gson_version = "2.8.5"
+    gson = "com.google.code.gson:gson:$gson_version"
+
+    firebase_bom_version = "32.8.0"
+    firebase_bom = "com.google.firebase:firebase-bom:$firebase_bom_version"
+
+    firebase_base_impl = "com.google.firebase"
+    firebase_crashlytics = "$firebase_base_impl:firebase-crashlytics-ktx"
+    firebase_analytics = "$firebase_base_impl:firebase-analytics"
+
+    realm_version = "1.8.0"
+    realm  = "io.realm.kotlin:library-base:$realm_version"
+
+    facebook_shimmer_version = "0.5.0"
+    facebook_shimmer = "com.facebook.shimmer:shimmer:$facebook_shimmer_version"
+
+    swipe_refresh_version = "1.1.0"
+    swipe_refresh = "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_version"
+
+    aa_chart_version = "7.2.1"
+    aa_charts = "com.github.AAChartModel:AAChartCore-Kotlin:$aa_chart_version"
+}
