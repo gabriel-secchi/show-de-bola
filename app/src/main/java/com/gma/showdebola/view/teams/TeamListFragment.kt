@@ -14,12 +14,34 @@ class TeamListFragment : PatternFragment<FragmentTeamListBinding, TeamListViewMo
     TeamListViewModel::class
 ) {
     override fun setupViews() {
-        //TODO("Not yet implemented")
         setupBackPressedButton()
+        setupTeamRegister()
     }
 
     override fun setupObservers() {
         //TODO("Not yet implemented")
+    }
+
+    private fun setupTeamRegister() {
+        binding.btnCreateTeam.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(binding.teamRegisterCard.id, TeamRegisterFragment(::onCreateTeam))
+                .commit()
+        }
+    }
+
+    private fun onCreateTeam(id: String) {
+        childFragmentManager.let { fragmentManager ->
+            fragmentManager.findFragmentById(binding.teamRegisterCard.id)?.let { fragment ->
+                fragmentManager.beginTransaction()
+                    .remove(fragment)
+                    .commitNow()
+            }
+        }
+
+        CustomSnackBar
+            .make(view, "Time Criado -> $id")
+            .show()
     }
 
     private fun setupBackPressedButton() {

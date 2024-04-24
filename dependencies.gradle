@@ -5,5 +5,10 @@ ext {
             [configuration: "implementation", dependency: "$koin_android"]
     ]
 
-    app = defaultDependencies
+    app = defaultDependencies + [
+            [configuration: "implementation", dependency: "$firebase_bom", isPlatform: true],
+            [configuration: "implementation", dependency: "$firebase_crashlytics"],
+            [configuration: "implementation", dependency: "$firebase_analytics"],
+            [configuration: "implementation", dependency: "$firebase_database"]
+    ]
 }

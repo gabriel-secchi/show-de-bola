@@ -19,6 +19,7 @@ ext {
     firebase_base_impl = "com.google.firebase"
     firebase_crashlytics = "$firebase_base_impl:firebase-crashlytics-ktx"
     firebase_analytics = "$firebase_base_impl:firebase-analytics"
+    firebase_database = "$firebase_base_impl:firebase-database"
 
     realm_version = "1.8.0"
     realm  = "io.realm.kotlin:library-base:$realm_version"
