@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Show de Bola</string>
-
-    <!-- Close App -->
-    <string name="message_close_app">Pressione novamente para fechar o app</string>
-</resources>
