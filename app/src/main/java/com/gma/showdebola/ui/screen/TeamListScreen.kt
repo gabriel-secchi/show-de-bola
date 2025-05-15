@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
@@ -14,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,9 +29,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gma.showdebola.R
-import com.gma.showdebola.viewmodel.TeamListViewModel
+import com.gma.showdebola.config.LocalNavController
+import com.gma.showdebola.viewmodel.TeamViewModel
+import com.gma.showdebola.viewmodel.state.SharedDataState
 import com.gma.showdebola.viewmodel.state.UiState
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 @Preview()
 @Composable
@@ -39,8 +44,14 @@ fun TeamListScreenPreview() {
 
 @Composable
 fun TeamListScreen(
-    viewModel: TeamListViewModel = koinViewModel()
+    viewModel: TeamViewModel = koinViewModel(),
+    sharedTeamState: SharedDataState = koinInject()
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.searchTeams()
+    }
+
+    val navController = LocalNavController.current
     var search by rememberSaveable { mutableStateOf("") }
     val uiState by viewModel.uiTeamListState.collectAsState()
 
@@ -66,10 +77,11 @@ fun TeamListScreen(
             )
 
             if (uiState is UiState.Success) {
-                val teamList = (uiState as UiState.Success).teamList
-                teamList?.let {
-                    it.forEach {
-
+                (uiState as UiState.Success).data?.let { teamList ->
+                    LazyColumn {
+                        items(teamList.size) { index ->
+                            TeamItemListScreen(teamList[index])
+                        }
                     }
                 }
             }
@@ -99,7 +111,7 @@ fun TeamListScreen(
             }
 
             is UiState.Success -> {
-                val teamList = (uiState as UiState.Success).teamList
+                val teamList = (uiState as UiState.Success).data
                 if (teamList.isNullOrEmpty()) {
                     Text(
                         text = stringResource(R.string.team_list_empty_list),
@@ -114,7 +126,10 @@ fun TeamListScreen(
         }
 
         FloatingActionButton(
-            onClick = {},
+            onClick = {
+                sharedTeamState.updateSelectedTeam(null)
+                navController.navigate("team_details")
+            },
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = Color.White,
             modifier = Modifier

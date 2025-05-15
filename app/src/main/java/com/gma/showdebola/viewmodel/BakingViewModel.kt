@@ -14,8 +14,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class BakingViewModel : ViewModel() {
-    private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Initial)
-    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+    //private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Initial)
+    //val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     private val generativeModel = GenerativeModel(
         modelName = "gemini-1.5-flash",
@@ -26,7 +26,7 @@ class BakingViewModel : ViewModel() {
         bitmap: Bitmap,
         prompt: String
     ) {
-        _uiState.value = UiState.Loading
+        //_uiState.value = UiState.Loading
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = generativeModel.generateContent(
@@ -36,10 +36,10 @@ class BakingViewModel : ViewModel() {
                     }
                 )
                 response.text?.let { outputContent ->
-                    _uiState.value = UiState.Success(null) //(outputContent)
+                    //_uiState.value = UiState.Success(null) //(outputContent)
                 }
             } catch (e: Exception) {
-                _uiState.value = UiState.Error(e.localizedMessage ?: "")
+          //      _uiState.value = UiState.Error(e.localizedMessage ?: "")
             }
         }
     }

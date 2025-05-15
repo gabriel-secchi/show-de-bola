@@ -1,29 +1,13 @@
 package com.gma.showdebola.viewmodel.state
 
-import com.gma.infrastructure.model.Team
-
 /**
  * A sealed hierarchy describing the state of the text generation.
  */
-sealed interface UiState {
+sealed class UiState<out T> {
 
-    /**
-     * Empty state when the screen is first shown
-     */
-    object Initial : UiState
+    object Initial : UiState<Nothing>()
+    object Loading : UiState<Nothing>()
+    data class Error(val errorMessage: String) : UiState<Nothing>()
+    data class Success<T>(val data: T?) : UiState<T>()
 
-    /**
-     * Still loading
-     */
-    object Loading : UiState
-
-    /**
-     * Text has been generated
-     */
-    data class Success(val teamList: List<Team>?) : UiState
-
-    /**
-     * There was an error generating text
-     */
-    data class Error(val errorMessage: String) : UiState
 }

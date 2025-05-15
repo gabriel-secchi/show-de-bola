@@ -70,7 +70,7 @@ fun BakingScreen(
     val placeholderResult = stringResource(R.string.results_placeholder)
     var prompt by rememberSaveable { mutableStateOf(placeholderPrompt) }
     var result by rememberSaveable { mutableStateOf(placeholderResult) }
-    val uiState by bakingViewModel.uiState.collectAsState()
+    //val uiState by bakingViewModel.uiState.collectAsState()
     val context = LocalContext.current
 
     Box(
@@ -136,17 +136,17 @@ fun BakingScreen(
                 }
             }
 
-            if (uiState is UiState.Loading) {
+            /*if (uiState is UiState.Loading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             } else {
                 var textColor = MaterialTheme.colorScheme.onSurface
                 if (uiState is UiState.Error) {
                     textColor = MaterialTheme.colorScheme.error
                     result = (uiState as UiState.Error).errorMessage
-                } else if (uiState is UiState.Success) {
+                } *//*else if (uiState is UiState.Success) {
                     textColor = MaterialTheme.colorScheme.onSurface
                     result = "" //(uiState as UiState.Success).teamList
-                }
+                }*//*
                 val scrollState = rememberScrollState()
                 Text(
                     text = result,
@@ -158,7 +158,7 @@ fun BakingScreen(
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 )
-            }
+            }*/
         }
 
         FloatingActionButton(

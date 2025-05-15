@@ -13,7 +13,7 @@ class PlayersDataSourceImpl(
     private val database: FirebaseDatabase
 ) : PlayersDataSource {
     override suspend fun update(player: DatabasePlayer): DatabasePlayer {
-        database.reference.child(TEAMS).child(player.id).setValue(player)
+        database.reference.child(PLAYERS).child(player.id).setValue(player)
         return player
     }
 
